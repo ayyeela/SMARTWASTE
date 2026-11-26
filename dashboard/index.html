@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SmartWaste Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="shell">
+<header>
+  <h1 class="brand">
+    <svg viewBox="0 0 32 32" fill="#fff" aria-hidden="true"><path d="M4.6 9.2 21.6 4.6l1 3.6-17 4.6z"/><path fill-rule="evenodd" d="M8 14h16l-1.6 15H9.6zM12 17v9h1.6v-9zM15.2 17v9h1.6v-9zM18.4 17v9H20v-9z"/></svg>
+    SmartWaste
+  </h1>
+  <div class="source">
+    <label for="mode">Sumber data</label>
+    <select id="mode">
+      <option value="sim">Simulasi</option>
+      <option value="esp">ESP32 (HTTP JSON)</option>
+    </select>
+    <input id="espUrl" type="url" placeholder="http://192.168.x.x/data" hidden>
+  </div>
+</header>
+
+<div id="alert" role="alert" hidden></div>
+
+<main>
+  <section class="bins" aria-label="Kapasitas tempat sampah" id="bins"></section>
+
+  <section class="panel ident" aria-label="Identifikasi sampah">
+    <h2 class="tag">Identifikasi Sampah</h2>
+    <div class="cam">
+      <video id="cam" playsinline muted hidden></video>
+      <canvas id="camBox" hidden></canvas>
+      <p id="camHint">Klik Nyalakan kamera dan izinkan akses kamera. Tanpa kamera, pakai tombol uji di bawah.</p>
+    </div>
+    <p class="map" id="live" aria-live="polite"></p>
+    <div class="row">
+      <button id="tmStart">Nyalakan kamera</button>
+    </div>
+    <p class="last" id="last">Belum ada sampah teridentifikasi.</p>
+    <div class="tests" role="group" aria-label="Uji manual">
+      <button data-k="organik">Organik</button>
+      <button data-k="anorganik">Anorganik</button>
+      <button data-k="residu">Residu</button>
+    </div>
+    <p class="map">Organik: sisa makanan dan daun. Anorganik: plastik, kertas, logam, kaca. Residu: sampah yang tidak bisa didaur ulang.</p>
+  </section>
+
+  <section class="panel riwayat" aria-label="Riwayat">
+    <h2 class="tag">Riwayat</h2>
+    <ol id="log"></ol>
+  </section>
+</main>
+
+<footer>Model urgensi: Decision Tree, akurasi uji <span id="acc"></span>. Data pelatihan berasal dari simulasi sensor.</footer>
+</div>
+
+<script src="model.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

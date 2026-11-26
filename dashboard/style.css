@@ -1,0 +1,92 @@
+/* Tampilan mengikuti desain Figma (frame 1440 px). 1rem = 10 px desain; semua ukuran ikut mengecil sesuai lebar layar.
+   Gambar latar: dashboard/bg.jpg (Export > JPG dari Figma). Tanpa file itu dipakai gradasi hijau-biru. */
+@font-face{
+  font-family:"Coolvetica";
+  src:local("Coolvetica"),url("fonts/Coolvetica%20Rg.otf") format("opentype");
+  font-weight:100 900;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:"Coolvetica";
+  src:local("Coolvetica Italic"),url("fonts/Coolvetica%20Rg%20It.otf") format("opentype");
+  font-weight:100 900;font-style:italic;font-display:swap;
+}
+:root{
+  --font:"Coolvetica","Fredoka",system-ui,sans-serif;
+  --organik:#6fdc97; --anorganik:#62b4f5; --residu:#c3cdd6;
+  --aman:#2f9e62; --waspada:#d99a00; --angkut:#e0503d;
+  --panel:#345c6a; --edge:#b7c9b9;
+}
+*{box-sizing:border-box}
+html{font-size:min(calc(100vw / 144),10px)}
+body{margin:0;min-height:100vh;color:#fff;font:500 2.2rem/1.4 var(--font);font-synthesis:none;position:relative;overflow-x:hidden}
+/* latar foto, dibuat agak blur */
+body::before{content:"";position:fixed;inset:-2%;z-index:-1;transform:scale(1.03);filter:blur(3.5px);
+  background:url("bg.jpg") center/cover no-repeat,linear-gradient(160deg,#7fb069 0%,#3c7a6e 55%,#2b5666 100%)}
+.shell{width:133.3rem;margin:0 auto;padding:4.2rem 0 6rem}
+
+/* kaca (glass) */
+.glass,.bin,.tag,.source,.panel .tag,.bin button{ -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px) }
+.bin{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.42);border-radius:6.4rem;
+  box-shadow:inset 0 0 8px 1px rgba(255,255,255,.2),0 8px 24px rgba(0,0,0,.08)}
+.tag{display:inline-flex;align-items:center;margin:0;height:6.7rem;padding:0 1.5rem;border-radius:999px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.42);
+  box-shadow:inset 0 0 8px rgba(255,255,255,.22),0 5px 8px rgba(0,0,0,.28);
+  font-size:4.2rem;font-weight:600;line-height:1;text-transform:capitalize;text-shadow:0 1px 2px rgba(0,0,0,.2)}
+
+header{display:flex;justify-content:space-between;align-items:center;gap:1.6rem;flex-wrap:wrap;margin-bottom:4.7rem}
+.brand{display:inline-flex;align-items:center;gap:1.4rem;height:8.9rem;margin:0;padding:0 4.2rem 0 3.4rem;
+  border:.8rem solid var(--edge);border-radius:999px;background:rgba(255,255,255,.02);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  font-size:4.9rem;font-weight:600;line-height:1}
+.brand svg{width:4.4rem;height:4.4rem;flex:none}
+.source{display:flex;gap:.9rem;align-items:center;flex-wrap:wrap;padding:.8rem 1.8rem;border-radius:999px;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.42);box-shadow:inset 0 0 8px rgba(255,255,255,.2);font-size:1.8rem}
+select,input,button{font:inherit;font-size:1.8rem;color:#fff;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.45);border-radius:999px;padding:.6rem 1.8rem;box-shadow:0 3px 6px rgba(0,0,0,.2)}
+input::placeholder{color:rgba(255,255,255,.7)}
+option{color:#14202b}
+button{cursor:pointer;font-weight:600}
+button:hover{background:rgba(255,255,255,.32)}
+:focus-visible{outline:.3rem solid #fff;outline-offset:.2rem}
+#alert{margin:-2rem 0 2.4rem;padding:1rem 2.4rem;border-radius:999px;background:var(--angkut);font-weight:600;text-align:center;box-shadow:0 6px 20px rgba(0,0,0,.2)}
+
+main{display:grid;grid-template-columns:75.9fr 53.5fr;column-gap:3.2rem;row-gap:7.5rem}
+.bins{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:2.6rem}
+.bin{display:grid;gap:3.8rem;align-content:start;padding:2rem 2.9rem 2.5rem}
+.bin .tag{justify-self:start}
+.body{display:flex;align-items:stretch;gap:4.7rem;margin-left:.6rem}
+.bag{position:relative;width:12.7rem;height:19.4rem;flex:none}
+.bag::after{content:"";position:absolute;inset:0;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='1.6 1.6 56.8 86.8'%3E%3Cpath d='M3 74V13C3 7.5 7.5 3 11.5 3C15.5 3 20 7 20 12C20 19 25 23 30 23C35 23 40 19 40 12C40 7 44.5 3 48.5 3C52.5 3 57 7.5 57 13V74Q57 87 44 87H16Q3 87 3 74Z' fill='none' stroke='white' stroke-width='2.8' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.tank{position:absolute;inset:0;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='1.6 1.6 56.8 86.8'%3E%3Cpath d='M3 74V13C3 7.5 7.5 3 11.5 3C15.5 3 20 7 20 12C20 19 25 23 30 23C35 23 40 19 40 12C40 7 44.5 3 48.5 3C52.5 3 57 7.5 57 13V74Q57 87 44 87H16Q3 87 3 74Z' fill='black'/%3E%3C/svg%3E") center/100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='1.6 1.6 56.8 86.8'%3E%3Cpath d='M3 74V13C3 7.5 7.5 3 11.5 3C15.5 3 20 7 20 12C20 19 25 23 30 23C35 23 40 19 40 12C40 7 44.5 3 48.5 3C52.5 3 57 7.5 57 13V74Q57 87 44 87H16Q3 87 3 74Z' fill='black'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.fill{position:absolute;left:0;right:0;bottom:0;height:0;background:var(--c);transition:height .8s ease}
+.info{display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;padding:.9rem 0 .2rem;min-width:0}
+.pct{font-size:5.2rem;font-weight:700;line-height:1;text-shadow:0 2px 6px rgba(0,0,0,.25)}
+.pct small{font-size:2.2rem;font-weight:400;opacity:.9;margin-left:.2rem}
+.mid{display:grid;gap:.6rem;justify-items:start}
+.meta{margin:0;font-size:1.7rem;line-height:1.2;opacity:.92}
+.badge{display:inline-block;padding:.2rem 1.4rem;border-radius:999px;font-size:1.7rem;line-height:1.3;background:var(--aman);box-shadow:0 2px 5px rgba(0,0,0,.25)}
+.badge.Waspada{background:var(--waspada)}.badge.Angkut{background:var(--angkut)}
+.info button{height:5.2rem;padding:0 1.3rem;font-size:2.7rem;line-height:1;font-weight:500;border-color:rgba(255,255,255,.5);box-shadow:inset 0 0 6px rgba(255,255,255,.25),0 3px 6px rgba(0,0,0,.25)}
+
+.panel{min-height:36.9rem;padding:3.5rem 4.5rem 4rem;background:var(--panel);border:.6rem solid var(--edge);border-radius:8.5rem}
+.panel .tag{height:7.4rem;padding:0 2.6rem;background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.3);
+  box-shadow:inset 0 .3rem .6rem -.1rem rgba(255,255,255,.32),0 5px 8px rgba(0,0,0,.28)}
+.cam{margin:2.6rem 0 1.8rem;background:rgba(0,0,0,.22);border-radius:3.2rem;min-height:22rem;display:grid;place-items:center;overflow:hidden;text-align:center;padding:1rem}
+.cam video,.cam canvas{max-width:100%;border-radius:2rem}
+.cam p{margin:0;font-size:1.9rem;opacity:.85}
+.row{display:flex;gap:.8rem;margin-top:1rem}
+.last{font-weight:600;margin:1.6rem 0 1rem;font-size:2.2rem}
+.tests{display:flex;gap:1rem;flex-wrap:wrap}
+.tests button,.row button{padding:.6rem 2.2rem;font-size:2rem}
+.map{opacity:.85;font-size:1.7rem;margin:1rem 0 0}
+#log{list-style:none;margin:2rem 0 0;padding:0;max-height:42rem;overflow:auto}
+#log li{padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.2);font-size:1.9rem;display:flex;gap:1.4rem}
+#log time{opacity:.65;flex:none;font-variant-numeric:tabular-nums}
+footer{margin-top:3rem;font-size:1.6rem;opacity:.9;text-shadow:0 1px 4px rgba(0,0,0,.4)}
+
+@media(max-width:900px){
+  html{font-size:clamp(7px,calc(100vw / 50),10px)}
+  .shell{width:calc(100% - 3rem);padding-top:2.4rem}
+  .bins{grid-template-columns:1fr}
+  main{grid-template-columns:1fr;row-gap:3rem}
+  .bins{gap:2rem}
+}
+@media(prefers-reduced-motion:reduce){.fill{transition:none}}
